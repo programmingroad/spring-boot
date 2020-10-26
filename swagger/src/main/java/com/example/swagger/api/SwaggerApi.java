@@ -18,7 +18,7 @@ public class SwaggerApi {
 
     @ApiOperation(value = "test",notes = "notes")
     @PostMapping(value = "/test")
-    public SwaggerDTO getHarborProjects(@RequestBody SwaggerDTO swaggerDTO) {
+    public SwaggerDTO test(@RequestBody SwaggerDTO swaggerDTO) {
         return swaggerDTO;
     }
 }
