@@ -40,4 +40,11 @@ public class ValidApi {
         result.put("id", id);
         return result;
     }
+
+    @PostMapping(value = "test4")
+    public Map<String, Object> test4(@RequestParam String id) {
+        Map<String, Object> result = new HashMap<>(1);
+        result.put("id", id);
+        return result;
+    }
 }
