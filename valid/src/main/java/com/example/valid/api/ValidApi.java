@@ -2,9 +2,11 @@ package com.example.valid.api;
 
 import com.example.valid.constant.Constants;
 import com.example.valid.dto.ValidDTO;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,10 +17,11 @@ import java.util.Map;
  **/
 
 @RestController
+@Validated
 public class ValidApi {
 
     @PostMapping(value = "/test1")
-    public ValidDTO test1(@RequestBody @Valid ValidDTO validDTO) {
+    public ValidDTO test1(@RequestBody @Validated ValidDTO validDTO) {
         return validDTO;
     }
 
@@ -31,4 +34,10 @@ public class ValidApi {
         return result;
     }
 
+    @PostMapping(value = "test3")
+    public Map<String, Object> test3(@NotEmpty(message = "id can't be empty") String id) {
+        Map<String, Object> result = new HashMap<>(1);
+        result.put("id", id);
+        return result;
+    }
 }
