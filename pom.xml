@@ -12,6 +12,7 @@
         <module>design-pattern</module>
         <module>future</module>
         <module>jwt</module>
+        <module>leetcode</module>
         <module>mybatis</module>
         <module>mybatis-plus</module>
         <module>observer</module>
