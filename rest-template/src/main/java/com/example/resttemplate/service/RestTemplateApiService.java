@@ -2,7 +2,7 @@ package com.example.resttemplate.service;
 
 import com.example.resttemplate.domain.OuterResp;
 import com.example.resttemplate.domain.Project;
-import com.example.resttemplate.domain.Registry;
+import com.example.resttemplate.domain.ProjectReq;
 import com.example.resttemplate.dto.ProjectDTO;
 import com.example.resttemplate.result.Result;
 import com.example.resttemplate.result.ResultUtil;
@@ -37,8 +37,8 @@ public class RestTemplateApiService {
         return ResultUtil.success(projectDTOS, pageNum, pageSize, projectOuterResp.getTotalCount());
     }
 
-    public Result create(Registry registry) {
-        harborApiService.createRegistry(registry);
+    public Result create(ProjectReq projectReq) {
+        harborApiService.createProject(projectReq);
         return ResultUtil.success(null);
     }
 }

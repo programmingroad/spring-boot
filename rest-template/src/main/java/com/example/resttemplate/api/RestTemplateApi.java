@@ -1,14 +1,11 @@
 package com.example.resttemplate.api;
 
-import com.example.resttemplate.domain.OuterResp;
-import com.example.resttemplate.domain.Project;
-import com.example.resttemplate.domain.Registry;
+import com.example.resttemplate.domain.ProjectReq;
 import com.example.resttemplate.dto.ProjectDTO;
 import com.example.resttemplate.result.Constants;
 import com.example.resttemplate.result.Result;
 import com.example.resttemplate.result.ResultUtil;
 import com.example.resttemplate.service.RestTemplateApiService;
-import com.example.resttemplate.service.harbor.HarborApiService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
@@ -50,12 +47,13 @@ public class RestTemplateApi {
 
     @PostMapping("test3")
     public Result<ProjectDTO> test3(@RequestBody ProjectDTO projectDTO) {
+        log.info("projectDTO={}", projectDTO);
         return ResultUtil.success(projectDTO);
     }
 
     @PostMapping("test4")
-    public Result test4(@RequestBody Registry registry) {
-        return restTemplateApiService.create(registry);
+    public Result test4(@RequestBody ProjectReq projectReq) {
+        return restTemplateApiService.create(projectReq);
     }
 
     @GetMapping(value = "/test5/{projectName}/repositories/")

@@ -5,9 +5,7 @@ import com.example.resttemplate.filter.AssetFilter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
-import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -31,12 +29,5 @@ public class LogInterceptor implements HandlerInterceptor {
                 assetHttpServletRequestWrapper.getContentType(), assetHttpServletRequestWrapper.getMethod(), JSON.toJSONString(parameterMap),
                 assetHttpServletRequestWrapper.getBody());
         return true;
-    }
-
-    @Override
-    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-        AssetFilter.AssetHttpServletResponseWrapper assetHttpServletResponseWrapper = (AssetFilter.AssetHttpServletResponseWrapper) response;
-        log.info("response: http-status={}, content-type={}, body={}", assetHttpServletResponseWrapper.getStatus(), assetHttpServletResponseWrapper.getContentType(),
-                assetHttpServletResponseWrapper.getBody());
     }
 }

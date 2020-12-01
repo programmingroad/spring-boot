@@ -17,6 +17,12 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @Slf4j
 public class GlobalExceptionHandler {
 
+    @ExceptionHandler(Exception.class)
+    public Result handleException(Exception e) {
+        log.error("Exception={}", e);
+        return ResultUtil.failed("internal error");
+    }
+
     @ExceptionHandler(HarborException.class)
     public Result handleHarborException(HarborException e) {
         log.error("HarborException={}", e);

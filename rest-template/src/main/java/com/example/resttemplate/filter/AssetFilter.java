@@ -2,16 +2,12 @@ package com.example.resttemplate.filter;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.io.output.TeeOutputStream;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpServletResponseWrapper;
 import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 /**
@@ -20,19 +16,18 @@ import java.io.IOException;
  * @description: 由于 request/response.getInputStream只能读取一次 故重写 getInputStream 重新设置inputStream
  **/
 @Slf4j
-//@Component
+@Component
 public class AssetFilter implements Filter {
 
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
+    public void init(FilterConfig filterConfig) {
 
     }
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         AssetHttpServletRequestWrapper assetHttpServletRequestWrapper = new AssetHttpServletRequestWrapper((HttpServletRequest) request);
-        AssetHttpServletResponseWrapper assetHttpServletResponseWrapper = new AssetHttpServletResponseWrapper((HttpServletResponse) response);
-        chain.doFilter(assetHttpServletRequestWrapper, assetHttpServletResponseWrapper);
+        chain.doFilter(assetHttpServletRequestWrapper, response);
     }
 
     @Override
@@ -65,7 +60,7 @@ public class AssetFilter implements Filter {
             return new ServletInputStream() {
 
                 @Override
-                public int read() throws IOException {
+                public int read() {
                     return byteArrayInputStream.read();
                 }
 
@@ -81,59 +76,6 @@ public class AssetFilter implements Filter {
 
                 @Override
                 public void setReadListener(ReadListener listener) {
-                }
-            };
-        }
-    }
-
-    public class AssetHttpServletResponseWrapper extends HttpServletResponseWrapper {
-
-        private String body;
-
-        /**
-         * Constructs a response adaptor wrapping the given response.
-         *
-         * @param response The response to be wrapped
-         * @throws IllegalArgumentException if the response is null
-         */
-        public AssetHttpServletResponseWrapper(HttpServletResponse response) throws IOException {
-            super(response);
-            final ServletOutputStream outputStream = response.getOutputStream();
-            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream() {
-                @Override
-                public void write(int b) {
-                    try {
-                        outputStream.write(b);
-                    } catch (IOException e) {
-                    }
-                }
-            };
-            this.body = byteArrayOutputStream.toString();
-        }
-
-        public String getBody() {
-            return this.body;
-        }
-
-        @Override
-        public ServletOutputStream getOutputStream() throws IOException {
-            final ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-            byteArrayOutputStream.write(this.body.getBytes());
-            return new ServletOutputStream() {
-
-                @Override
-                public void write(int b) throws IOException {
-                    byteArrayOutputStream.write(b);
-                }
-
-                @Override
-                public boolean isReady() {
-                    return false;
-                }
-
-                @Override
-                public void setWriteListener(WriteListener listener) {
-
                 }
             };
         }

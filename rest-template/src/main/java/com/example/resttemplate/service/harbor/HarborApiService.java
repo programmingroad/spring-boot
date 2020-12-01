@@ -108,6 +108,11 @@ public class HarborApiService {
         ResponseEntity<Void> responseEntity = restTemplate.exchange(requestHarborUrl, HttpMethod.POST, this.getHttpEntity(HttpMethod.POST, registry), Void.class);
     }
 
+    public void createProject(ProjectReq projectReq) {
+        String requestHarborUrl = this.getRequestHarborUrl(HarborConstants.PROJECTS, false);
+        ResponseEntity<Void> responseEntity = restTemplate.exchange(requestHarborUrl, HttpMethod.POST, this.getHttpEntity(HttpMethod.POST, projectReq), Void.class);
+    }
+
     /**
      * 获取registry
      *

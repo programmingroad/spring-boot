@@ -22,7 +22,7 @@ public class LogClientHttpRequestInterceptor implements ClientHttpRequestInterce
     @Override
     public ClientHttpResponse intercept(HttpRequest request, byte[] body, ClientHttpRequestExecution execution)
             throws IOException {
-        log.info("restTemplate request: uri={}, content-type={}, method={}, params={}", request.getURI(), request.getHeaders().getContentType(), request.getMethodValue(),
+        log.info("restTemplate request: uri={}, content-type={}, method={}, body={}", request.getURI(), request.getHeaders().getContentType(), request.getMethodValue(),
                 new String(body));
         return execution.execute(request, body);
     }
