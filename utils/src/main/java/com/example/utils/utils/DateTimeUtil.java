@@ -1,4 +1,4 @@
-package com.example.resttemplate.utils;
+package com.example.utils.utils;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
@@ -164,7 +164,7 @@ public class DateTimeUtil {
      * @param utc
      * @return
      */
-    public static String UtcToLoal(String utc) {
+    public static String UtcToLocal(String utc) {
         return defaultDateTimeFormatter.format(LocalDateTime.ofInstant(Instant.parse(utc), ZoneId.systemDefault()));
     }
 

@@ -1,4 +1,5 @@
-package com.example.resttemplate.utils;
+package com.example.utils.utils;
+
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
@@ -36,6 +37,4 @@ public class BeanValidateUtil {
         }
         return null;
     }
-
-
 }

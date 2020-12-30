@@ -16,12 +16,8 @@ public class Test {
     public static void main(String[] args) {
         Lock lock = new Lock();
         Lock lock1 = new Lock();
-        new Thread(() -> {
-            lock.test1();
-        }, "t1").start();
-        new Thread(() -> {
-            lock1.test2();
-        }, "t2").start();
+        new Thread(() -> lock.test1(), "t1").start();
+        new Thread(() -> lock1.test2(), "t2").start();
     }
 
 
@@ -30,10 +26,9 @@ public class Test {
 
 @Slf4j
 class Lock {
-    private static Object lock = new Object();
+    private Object lock = new Object();
 
     public void test1() {
-        Integer
         synchronized (lock) {
             log.info("test1 start");
             try {

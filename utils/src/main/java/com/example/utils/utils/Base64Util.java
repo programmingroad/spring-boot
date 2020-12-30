@@ -1,4 +1,4 @@
-package com.example.resttemplate.utils;
+package com.example.utils.utils;
 
 import org.springframework.util.StreamUtils;
 
