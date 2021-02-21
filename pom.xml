@@ -20,6 +20,7 @@
         <module>swagger</module>
         <module>utils</module>
         <module>valid</module>
+·        <module>websocket</module>
     </modules>
 
 </project>
